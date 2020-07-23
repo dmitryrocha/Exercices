@@ -8,7 +8,7 @@ public class Dia05 {
         System.out.println("Qual o número?");
 
         int n = sc.nextInt();
-        if(n<=2 && n >=20) {
+        if(n>=2 && n <=20) {
             for (int i = 1; i <= 10; i++) {
                 int resultado = n * i;
                 System.out.println(n + " x " + i + " = " + resultado);
