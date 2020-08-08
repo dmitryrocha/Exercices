@@ -1,7 +1,7 @@
 package hackerRank30Days;
 
 
-public class Day20 {
+public class Dia20 {
     public static void main(String[] args) {
         int[] array = {5,4,2,1};
         int [] array2 = {1,2,3};
