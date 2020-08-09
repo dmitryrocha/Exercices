@@ -3,6 +3,23 @@ package hackerRank30Days;
 import java.util.Scanner;
 
 public class Dia22 {
+
+//    Solução alternativa
+//
+//    public static int getHeight(NoHR root){
+//        int alturaEsquerda = 0;
+//        int alturaDireita = 0;
+//
+//        if(root.left != null) {
+//            alturaEsquerda = getHeight(root.left) + 1;
+//        }
+//        if(root.right != null) {
+//            alturaDireita = getHeight(root.right) + 1;
+//        }
+//
+//        return(alturaEsquerda > alturaDireita ? alturaEsquerda : alturaDireita);
+//    }
+
     public static int getHeight(NoHR root){
         NoHR temp = root;
         int altura = 0;
