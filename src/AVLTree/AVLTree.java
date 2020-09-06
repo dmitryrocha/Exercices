@@ -146,7 +146,7 @@ public class AVLTree {
             return 1;
         } else if (this.esq != null && this.dir == null) {
             // só o da esquerda tem filhos
-            return 1 + this.calcularAltura();
+            return 1 + this.esq.calcularAltura();
         } else if (this.esq == null && this.dir != null) {
             // só o da direita em filhos
             return 1 + this.dir.calcularAltura(); 
@@ -175,6 +175,107 @@ public class AVLTree {
         if(this.esq != null) {
             this.esq.calcularBalanceamento(); 
         }
+    }
+
+    // Métodos de verificação e rotação
+    public AVLTree verificacaBalanceamento() {
+        if(this.balanco >=2 || this.balanco <= -2) { // significa que a árvore está desbalanceada
+            if(this.balanco >= 2) { // a árvore está desbalanceada para a direita
+                if(this.balanco * this.dir.getBalanco() > 0) { // significa que o desbalanceamento é todo para a direita
+                    System.out.println("Rotação simples à direita");
+                    return rotacaoSimplesDireita();
+                } else { // significa que o desbalanceamento está a direita e a esquerda
+                    System.out.println("Rotação dupla à direita");
+                    return rotacaoDuplaDireita();
+                }
+            } else { // significa que o desbalanceamento é à esquerda
+                if(this.balanco * this.esq.getBalanco() > 0) { // significa que o desbalanceamento é todo para a esquerda
+                    System.out.println("Rotação simples à esquerda");
+                    return rotacaoSimplesEsquerda();
+                } else {
+                    System.out.println("Rotação dupla à esquerda");
+                    return rotacaoDuplaEsquerda();
+                }
+            }
+        }
+        this.calcularBalanceamento();
+        if(this.esq != null) {
+            this.esq = this.esq.verificacaBalanceamento();
+        }
+        if(this.dir != null) {
+            this.dir = this.dir.verificacaBalanceamento();
+        }
+        return this;
+    }
+
+    public AVLTree rotacaoSimplesDireita() {
+        AVLTree filhoDir;
+        AVLTree filhoDoFilho = null;
+
+        filhoDir = this.getDir();
+        if(this.dir != null) {
+            if(this.dir.getEsq() != null) {
+                filhoDoFilho = filhoDir.getEsq();
+            }
+        }
+        filhoDir.setEsq(this);
+        this.setDir(filhoDoFilho);
+
+        return filhoDir;
+    }
+
+    public AVLTree rotacaoDuplaDireita() {
+        AVLTree arvore = this;
+        AVLTree filhoDir = this.getDir();
+        AVLTree filhoDoFilho = filhoDir.getEsq();
+        AVLTree noInserido = filhoDoFilho.getDir();
+
+        // parte 1: Alinhar
+        filhoDir.setEsq(noInserido);
+        filhoDoFilho.setDir(filhoDir);
+        this.setDir(filhoDoFilho);
+
+        // parte 2: tornar o filho à direita a nova raiz
+        AVLTree novoFilhoDir = this.getDir();
+        arvore.setDir(null);
+        novoFilhoDir.setEsq(arvore);
+        return novoFilhoDir;
+
+    }
+
+    public AVLTree rotacaoSimplesEsquerda() {
+        AVLTree filhoEsq;
+        AVLTree filhoDoFilho = null;
+
+        filhoEsq = this.getEsq();
+        if(this.esq != null) {
+            if(this.esq.getDir() != null) {
+                filhoDoFilho = filhoEsq.getDir();
+            }
+        }
+        filhoEsq.setDir(this);
+        this.setEsq(filhoDoFilho);
+
+        return filhoEsq;
+        
+    }
+
+    public AVLTree rotacaoDuplaEsquerda() {
+        AVLTree arvore = this;
+        AVLTree filhoEsq =  this.getEsq();
+        AVLTree filhoDoFilho = filhoEsq.getDir();
+        AVLTree noInserido = filhoDoFilho.getEsq();
+
+        // parte 1: alinhar 
+        filhoEsq.setDir(noInserido);
+        filhoDoFilho.setEsq(filhoEsq);
+        this.setEsq(filhoDoFilho);
+
+        // parte 2: tornar o filho à esquerda a nova raiz
+        AVLTree novoFilhoEsq = this.getEsq();
+        arvore.setEsq(null);
+        novoFilhoEsq.setDir(arvore);
+        return novoFilhoEsq;
     }
 
     public String toString() {
