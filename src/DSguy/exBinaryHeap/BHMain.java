@@ -9,12 +9,12 @@ public class BHMain {
         heap.inserirNoHeap(90);
         heap.inserirNoHeap(80);
         heap.inserirNoHeap(70);
-        heap.inserirNoHeap(60);
+        heap.inserirNoHeap(75);
         heap.inserirNoHeap(50);
         heap.inserirNoHeap(40);
         heap.inserirNoHeap(30);
 
-        heap.ordenarLevel();
+        heap.imprimirArvore();
 
 
     }

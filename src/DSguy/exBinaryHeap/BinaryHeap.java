@@ -37,12 +37,12 @@ public class BinaryHeap {
     //Método insere valor no monte
     public void inserirNoHeap(int valor) {
         //Adiciona 1 pois tamanhoDaArvore sempr aponta para a última célula preenchida do array
-        System.out.println("Inserir " + valor + " no monte...");
+        System.out.println("Inserir " + valor + " na árvore...");
         array[tamanhoArvore + 1] = valor;
         tamanhoArvore++;
         balancearFundoProTopo(tamanhoArvore);
         System.out.println("Valor " + valor + " inserido com sucesso");
-        ordenarLevel();
+        imprimirArvore();
     }
 
     public void peek() {
@@ -66,7 +66,7 @@ public class BinaryHeap {
             tamanhoArvore--;
             balancearTopoProFundo(1);
             System.out.println("Valor extraído com sucesso");
-            ordenarLevel();
+            imprimirArvore();
             return valorExtraido;
         }
     }
@@ -86,7 +86,7 @@ public class BinaryHeap {
 
     public void balancearTopoProFundo(int index) {
         int esq = index*2;
-        int dir = esq+1;
+        int dir = (index*2)+1;
         int diMenor = 0;
 
         //se nó não tiver filhos, nada pode ser feito
@@ -117,7 +117,7 @@ public class BinaryHeap {
         balancearTopoProFundo(diMenor);
     }
 
-    public void ordenarLevel() {
+    public void imprimirArvore() {
         System.out.println("Imprimindo todos os elementos da árvore");
         for(int i = 1; i <= tamanhoArvore; i++) {
             System.out.print(array[i]+" ");
