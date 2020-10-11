@@ -20,8 +20,8 @@ public class CarrinhoDeCompras {
                 String ingrediente = ingredientesDaPizza.get(i);
                 if(adicionarIngrediente.containsKey(ingrediente)){
                     int qtdIngrediente = adicionarIngrediente.get(ingrediente);
-                    qtdIngrediente++;
-                    adicionarIngrediente.replace(ingrediente, qtdIngrediente);
+
+                    adicionarIngrediente.put(ingrediente, qtdIngrediente+1);
                 } else {
                     adicionarIngrediente.put(ingrediente, 1);
                 }
